@@ -29,7 +29,6 @@ public class StarFieldManager : MonoBehaviour
             return stars;
         }
     }
-
     void Awake()
     {
         instance = this;
@@ -94,6 +93,23 @@ public class StarFieldManager : MonoBehaviour
 
     public void RecolorStars()
     {
+
+    }
+
+
+    public float maxVmag = 6.5f;
+    private float scroll;
+    private void Update()
+    {
+        if (0f != Input.mouseScrollDelta.y)
+        {
+            maxVmag = Mathf.Clamp(maxVmag + Input.mouseScrollDelta.y, 2.5f, 25.5f);
+            foreach (Star star in Stars)
+            {
+                star.maxVisibleMagnitude = maxVmag;
+            }
+            scroll = Input.mouseScrollDelta.y;
+        }
 
     }
 }

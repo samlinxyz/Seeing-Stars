@@ -7,6 +7,8 @@ public class Star : MonoBehaviour
     public Transform cam;
     public StarFieldManager field;
 
+    public float maxVisibleMagnitude = 6.5f;
+
     [SerializeField]
     private Vector3 truePosition = Vector3.zero;
     public Vector3 TruePosition
@@ -100,7 +102,7 @@ public class Star : MonoBehaviour
     public void UpdateTransform()
     {
         float distance = Vector3.Distance(cam.position, transform.position);    //  Distance is not optimal. Use sqrMagnitude.
-        float visibility = 1f - VmagAt(distance) / 6.5f;
+        float visibility = 1f - VmagAt(distance) / maxVisibleMagnitude;
         visibility = Mathf.Clamp(visibility, 0f, 5f); // 5 is way more than the max
         if (visibility == 0f)
         {
